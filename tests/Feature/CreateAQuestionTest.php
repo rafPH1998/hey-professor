@@ -31,7 +31,9 @@ test('should check if ends with question mark ?', function () {
         'question' => str_repeat('*', 260)
     ]);
 
-    $request->assertSessionHas('error', 'Você não identificou o ?. Por tanto o texto precisa ser uma pergunta.');
+    $request->assertSessionHasErrors([
+        'question' => 'Você não identificou o ?. Por tanto o texto precisa ser uma pergunta.',
+    ]);
     assertDatabaseCount('questions', 0);
 
 });
