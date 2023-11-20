@@ -25,6 +25,7 @@ class QuestionController extends Controller
         ]);
 
         Question::query()->create(['question' => request()->question]);
-        return to_route('dashboard');
+
+        return redirect('dashboard')->with('success', 'Question created with success!!');
     }
 }
