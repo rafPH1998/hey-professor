@@ -11,12 +11,12 @@
         @endif
 
         <x-form post :action="route('question.store')">
-            <x-textarea label="Question" name="question"/>
+            <x-textarea label="Pergunta" name="question"/>
             <x-btn.primary>
-                SAVE
+                SALVAR
             </x-btn.primary>
             <x-btn.reset>
-                CANCEL
+                CANCELAR
             </x-btn.reset>
         </x-form>
 

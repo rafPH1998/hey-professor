@@ -50,19 +50,24 @@ class User extends Authenticatable
 
     public function like(Question $question): void
     {
-        $like = $this->votes()
-                ->where('question_id', '=', $question->id)
-                ->first();
-
-        if ($like) {
-            $like->delete();
-        } else {
-            $this->votes()->create([
-                'question_id' => $question->id,
+        $this->votes()->updateOrCreate(
+            ['question_id' => $question->id],
+            [
                 'like' => 1,
                 'unlike' => 0
-            ]);
-        }
+            ]
+        );
+    }
+
+    public function unlike(Question $question): void
+    {
+        $this->votes()->updateOrCreate(
+            ['question_id' => $question->id],
+            [
+                'like' => 0,
+                'unlike' => 1
+            ]
+        );
     }
 
 }
