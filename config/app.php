@@ -30,6 +30,7 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+    'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
