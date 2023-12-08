@@ -8,6 +8,14 @@ use Illuminate\Http\RedirectResponse;
 
 class QuestionController extends Controller
 {
+    public function index()
+    {
+        $user = auth()->user();
+        return view('question.index', [
+            'questions' => $user->questions
+        ]);
+    }
+
     public function store() : RedirectResponse
     {
         request()->validate([
@@ -28,6 +36,6 @@ class QuestionController extends Controller
             'draft'    => true
         ]);
 
-        return redirect('dashboard')->with('success', 'Question created with success!!');
+        return back()->with('success', 'Question created with success!!');
     }
 }
