@@ -5,11 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Question;
 use Closure;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class QuestionController extends Controller
 {
+    public function index()
+    {
+        $user = auth()->user();
+
+        return view('question.index', [
+            'questions' => $user->questions,
+        ]);
+    }
+
     public function store() : RedirectResponse
     {
         request()->validate([
@@ -24,8 +31,22 @@ class QuestionController extends Controller
             ],
         ]);
 
-        Question::query()->create(['question' => request()->question]);
+         /** @var User $user */
+        $user = auth()->user();
+        $user->questions()->create([
+            'question' => request()->question,
+            'draft'    => true
+        ]);
 
-        return redirect('dashboard')->with('success', 'Question created with success!!');
+        return back()->with('success', 'Question created with success!!');
+    }
+
+    public function destroy(Question $question): RedirectResponse
+    {
+        $this->authorize('destroy', $question);
+
+        $question->delete();
+
+        return back();
     }
 }
