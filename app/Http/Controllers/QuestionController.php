@@ -11,8 +11,9 @@ class QuestionController extends Controller
     public function index()
     {
         $user = auth()->user();
+
         return view('question.index', [
-            'questions' => $user->questions
+            'questions' => $user->questions,
         ]);
     }
 
@@ -30,6 +31,7 @@ class QuestionController extends Controller
             ],
         ]);
 
+         /** @var User $user */
         $user = auth()->user();
         $user->questions()->create([
             'question' => request()->question,
@@ -37,5 +39,14 @@ class QuestionController extends Controller
         ]);
 
         return back()->with('success', 'Question created with success!!');
+    }
+
+    public function destroy(Question $question): RedirectResponse
+    {
+        $this->authorize('destroy', $question);
+
+        $question->delete();
+
+        return back();
     }
 }

@@ -11,4 +11,9 @@ class QuestionPolicy
     {
         return $question->user->is($user);
     }
+
+    public function destroy(User $user, Question $question): bool
+    {
+        return $question->user->is($user);
+    }
 }
