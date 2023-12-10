@@ -11,6 +11,8 @@
             @foreach ($questions as $item)
                 <x-question-list :question="$item"/>
             @endforeach
+
+            {{ $questions->links() }}
        </div>
 
     </x-container>
