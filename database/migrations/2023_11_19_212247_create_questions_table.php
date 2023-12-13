@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->text('question');
             $table->boolean('draft')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
