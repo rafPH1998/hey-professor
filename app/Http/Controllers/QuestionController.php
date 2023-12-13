@@ -58,4 +58,14 @@ class QuestionController extends Controller
 
         return back();
     }
+
+    public function restore(int $id): RedirectResponse
+    {
+        $question = Question::withTrashed()->find($id);
+
+        $question->restore();
+
+        return back();
+    }
+
 }
