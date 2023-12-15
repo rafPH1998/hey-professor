@@ -2,7 +2,6 @@
 
 use App\Models\Question;
 use App\Models\User;
-use GuzzleHttp\Psr7\Query;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 use function Pest\Laravel\actingAs;
